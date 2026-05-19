@@ -12,7 +12,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/motohasystem/folder-history.git"
+    "url": "https://github.com/motohasystem/vscode-folder-history.git"
   },
   "license": "MIT",
   "main": "./out/extension.js",
