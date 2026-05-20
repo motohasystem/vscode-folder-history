@@ -107,6 +107,26 @@ export class HistoryStorage {
   }
 
   /**
+   * Bulk-add stars (union). Returns count added.
+   */
+  mergeStars(stars: string[]): number {
+    const data = this.load();
+    const existing = new Set(data.stars);
+    let added = 0;
+    for (const s of stars) {
+      if (!existing.has(s)) {
+        existing.add(s);
+        data.stars.push(s);
+        added++;
+      }
+    }
+    if (added > 0) {
+      this.save(data);
+    }
+    return added;
+  }
+
+  /**
    * Toggle star for a folder. Returns the new state (true = starred).
    */
   toggleStar(folderPath: string): boolean {

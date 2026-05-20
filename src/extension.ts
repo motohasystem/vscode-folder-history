@@ -1,5 +1,6 @@
 import * as vscode from 'vscode';
 import * as path from 'path';
+import * as fs from 'fs';
 import { HistoryStorage, HistoryEntry, todayLocal } from './storage';
 import { HistoryWebviewPanel, HistorySidebarProvider } from './webview';
 import { findStateVscdbPath, importFromStateVscdb } from './importer';
@@ -70,6 +71,20 @@ export function activate(context: vscode.ExtensionContext): void {
       panel.refresh();
     })
   );
+
+  context.subscriptions.push(
+    vscode.commands.registerCommand('folderHistory.export', async () => {
+      await exportHistory();
+    })
+  );
+
+  context.subscriptions.push(
+    vscode.commands.registerCommand('folderHistory.import', async () => {
+      await importHistory();
+      sidebar.refresh();
+      panel.refresh();
+    })
+  );
 }
 
 export function deactivate(): void {
@@ -97,6 +112,75 @@ function recordFolder(folder: vscode.WorkspaceFolder): void {
     storage.addEntry(entry);
   } catch (err) {
     console.error('[folder-history] failed to record entry', err);
+  }
+}
+
+async function exportHistory(): Promise<void> {
+  const data = storage.load();
+  const defaultName = `folder-history-export-${todayLocal()}.json`;
+  const uri = await vscode.window.showSaveDialog({
+    defaultUri: vscode.Uri.file(defaultName),
+    filters: { JSON: ['json'] },
+    saveLabel: 'エクスポート',
+  });
+  if (!uri) {
+    return;
+  }
+  try {
+    await fs.promises.writeFile(uri.fsPath, JSON.stringify(data, null, 2), 'utf8');
+    vscode.window.showInformationMessage(
+      `${data.entries.length}件のエントリ、${data.stars.length}件のスターをエクスポートしました。`
+    );
+  } catch (err) {
+    vscode.window.showErrorMessage(
+      `エクスポートに失敗しました: ${(err as Error).message}`
+    );
+  }
+}
+
+async function importHistory(): Promise<void> {
+  const uris = await vscode.window.showOpenDialog({
+    canSelectMany: false,
+    filters: { JSON: ['json'] },
+    openLabel: 'インポート',
+  });
+  if (!uris || uris.length === 0) {
+    return;
+  }
+  try {
+    const raw = await fs.promises.readFile(uris[0].fsPath, 'utf8');
+    const parsed = JSON.parse(raw);
+    if (!parsed || typeof parsed !== 'object' || !Array.isArray(parsed.entries)) {
+      vscode.window.showErrorMessage(
+        'JSONの形式が不正です（entries 配列が必要）。'
+      );
+      return;
+    }
+    const entries: HistoryEntry[] = (parsed.entries as unknown[])
+      .filter(
+        (e): e is { date?: unknown; path: string; name: string } =>
+          !!e &&
+          typeof e === 'object' &&
+          typeof (e as { path?: unknown }).path === 'string' &&
+          typeof (e as { name?: unknown }).name === 'string'
+      )
+      .map(e => ({
+        date: typeof e.date === 'string' ? e.date : null,
+        path: e.path,
+        name: e.name,
+      }));
+    const stars: string[] = Array.isArray(parsed.stars)
+      ? (parsed.stars as unknown[]).filter((s): s is string => typeof s === 'string')
+      : [];
+    const addedEntries = storage.addEntries(entries);
+    const addedStars = storage.mergeStars(stars);
+    vscode.window.showInformationMessage(
+      `${addedEntries}件のエントリ、${addedStars}件のスターを取り込みました（重複はスキップ）。`
+    );
+  } catch (err) {
+    vscode.window.showErrorMessage(
+      `インポートに失敗しました: ${(err as Error).message}`
+    );
   }
 }
 
