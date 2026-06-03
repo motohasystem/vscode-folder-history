@@ -2,6 +2,8 @@
 
 VS Code で開いたフォルダを日付付きで記録し、過去履歴をリスト表示してクリックでエクスプローラを開ける拡張機能です。
 
+![](img/snapshot.png)
+
 ## 機能
 
 - フォルダを開いた日付を `YYYY-MM-DD` で記録（同日重複は1件）
@@ -14,10 +16,10 @@ VS Code で開いたフォルダを日付付きで記録し、過去履歴をリ
 
 ## コマンド
 
-| コマンド | 説明 |
-| --- | --- |
-| `Folder History: Show` | 履歴一覧を WebView で表示 |
-| `Folder History: Open Log File` | `history.json` をエディタで開く |
+| コマンド                                          | 説明                               |
+| ------------------------------------------------- | ---------------------------------- |
+| `Folder History: Show`                            | 履歴一覧を WebView で表示          |
+| `Folder History: Open Log File`                   | `history.json` をエディタで開く    |
 | `Folder History: Import from VS Code Recent List` | VS Code の最近使用した項目を取込み |
 
 ## データ保存場所
