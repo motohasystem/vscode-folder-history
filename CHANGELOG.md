@@ -2,6 +2,12 @@
 
 本拡張機能の変更履歴です。フォーマットは [Keep a Changelog](https://keepachangelog.com/ja/1.1.0/) に準拠し、[Semantic Versioning](https://semver.org/lang/ja/) を採用しています。
 
+## [0.5.0] - 2026-06-04
+
+### Added
+- **エクスポート機能**: コマンド「Folder History: Export」で、履歴（`entries`）とスター（`stars`）を JSON ファイルに書き出し。保存ダイアログの既定名は `folder-history-export-YYYY-MM-DD.json`。
+- **インポート機能**: コマンド「Folder History: Import」で、書き出した JSON から履歴とスターを取り込み。重複排除キー（`date + path`）で既存と重なるエントリ、および既存スターはスキップ。不正な JSON（`entries` 配列なし）はエラー表示。
+
 ## [0.4.0] - 2026-04-28
 
 ### Added

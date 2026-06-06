@@ -21,8 +21,11 @@ export class HistoryWebviewController {
         case 'openInExplorer':
           await openInExplorer(String(msg.path));
           break;
-        case 'openInVscode':
-          await openInVscode(String(msg.path));
+        case 'openInVscodeNewWindow':
+          await openInVscode(String(msg.path), true);
+          break;
+        case 'openInVscodeSameWindow':
+          await openInVscode(String(msg.path), false);
           break;
         case 'copyPath':
           await copyPath(String(msg.path));
@@ -128,15 +131,17 @@ async function openInExplorer(folderPath: string): Promise<void> {
   }
 }
 
-async function openInVscode(folderPath: string): Promise<void> {
+async function openInVscode(folderPath: string, forceNewWindow: boolean): Promise<void> {
   if (!folderPath) {
     return;
   }
   try {
     const uri = vscode.Uri.file(folderPath);
-    await vscode.commands.executeCommand('vscode.openFolder', uri, {
-      forceNewWindow: true,
-    });
+    await vscode.commands.executeCommand(
+      'vscode.openFolder',
+      uri,
+      forceNewWindow ? { forceNewWindow: true } : { forceReuseWindow: true }
+    );
   } catch (err) {
     vscode.window.showErrorMessage(
       `VS Code でフォルダを開けませんでした: ${folderPath} (${(err as Error).message})`
@@ -539,7 +544,8 @@ function renderHtml(entries: HistoryEntry[], stars: string[]): string {
       +   countLabel
       + '</div>'
       + '<div class="menu" role="menu">'
-      +   '<button data-action="openInVscode" role="menuitem"><span class="ico">&#x270E;</span>VS Code で開く</button>'
+      +   '<button data-action="openInVscodeNewWindow" role="menuitem"><span class="ico">&#x270E;</span>新しいウィンドウで開く</button>'
+      +   '<button data-action="openInVscodeSameWindow" role="menuitem"><span class="ico">&#x270E;</span>現在のウィンドウで開く</button>'
       +   '<button data-action="openInExplorer" role="menuitem"><span class="ico">&#x1F4C1;</span>エクスプローラで開く</button>'
       +   '<button data-action="copyPath" role="menuitem"><span class="ico">&#x29C9;</span>フルパスをコピー</button>'
       + '</div>'
