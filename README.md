@@ -35,13 +35,13 @@ VS Code で開いたフォルダを日付付きで記録し、過去の履歴を
 
 ## コマンド
 
-| コマンド                                          | 説明                               |
-| ------------------------------------------------- | ---------------------------------- |
-| `Folder History: Show`                            | 履歴一覧を WebView パネルで表示     |
-| `Folder History: Refresh`                         | 表示を再読み込み                   |
-| `Folder History: Open Log File`                   | `history.json` をエディタで開く    |
-| `Folder History: Export`                          | 履歴・スターを JSON へ書き出し      |
-| `Folder History: Import`                          | JSON から履歴・スターを取り込み     |
+| コマンド                                          | 説明                                          |
+| ------------------------------------------------- | --------------------------------------------- |
+| `Folder History: Show`                            | 履歴一覧を WebView パネルで表示               |
+| `Folder History: Refresh`                         | 表示を再読み込み                              |
+| `Folder History: Open Log File`                   | `history.json` をエディタで開く               |
+| `Folder History: Export`                          | 履歴・スターを JSON へ書き出し                |
+| `Folder History: Import`                          | JSON から履歴・スターを取り込み               |
 | `Folder History: Import from VS Code Recent List` | VS Code の最近使用した項目を取込み（Windows） |
 
 ## データ保存場所
