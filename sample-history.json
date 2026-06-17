@@ -1,0 +1,29 @@
+{
+  "version": 2,
+  "entries": [
+    { "date": "2026-06-15", "path": "/home/dev/projects/task-manager-app", "name": "task-manager-app" },
+    { "date": "2026-06-15", "path": "/home/dev/projects/weather-dashboard", "name": "weather-dashboard" },
+    { "date": "2026-06-14", "path": "/home/dev/projects/task-manager-app", "name": "task-manager-app" },
+    { "date": "2026-06-14", "path": "/home/dev/projects/blog-platform", "name": "blog-platform" },
+    { "date": "2026-06-13", "path": "/home/dev/projects/task-manager-app", "name": "task-manager-app" },
+    { "date": "2026-06-12", "path": "/home/dev/projects/inventory-system", "name": "inventory-system" },
+    { "date": "2026-06-12", "path": "/home/dev/projects/weather-dashboard", "name": "weather-dashboard" },
+    { "date": "2026-06-11", "path": "/home/dev/projects/recipe-finder", "name": "recipe-finder" },
+    { "date": "2026-06-10", "path": "/home/dev/projects/task-manager-app", "name": "task-manager-app" },
+    { "date": "2026-06-10", "path": "/home/dev/projects/portfolio-site", "name": "portfolio-site" },
+    { "date": "2026-06-09", "path": "/home/dev/projects/chat-bot", "name": "chat-bot" },
+    { "date": "2026-06-08", "path": "/home/dev/projects/weather-dashboard", "name": "weather-dashboard" },
+    { "date": "2026-06-06", "path": "/home/dev/projects/markdown-editor", "name": "markdown-editor" },
+    { "date": "2026-06-05", "path": "/home/dev/projects/expense-tracker", "name": "expense-tracker" },
+    { "date": "2026-06-03", "path": "/home/dev/projects/blog-platform", "name": "blog-platform" },
+    { "date": "2026-06-02", "path": "/home/dev/projects/task-manager-app", "name": "task-manager-app" },
+    { "date": "2026-05-28", "path": "/home/dev/projects/game-of-life", "name": "game-of-life" },
+    { "date": "2026-05-20", "path": "/home/dev/projects/portfolio-site", "name": "portfolio-site" },
+    { "date": null, "path": "/home/dev/archive/legacy-crm", "name": "legacy-crm" },
+    { "date": null, "path": "/home/dev/archive/old-prototype", "name": "old-prototype" }
+  ],
+  "stars": [
+    "/home/dev/projects/task-manager-app",
+    "/home/dev/projects/weather-dashboard"
+  ]
+}
