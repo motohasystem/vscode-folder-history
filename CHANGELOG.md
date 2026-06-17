@@ -2,6 +2,14 @@
 
 本拡張機能の変更履歴です。フォーマットは [Keep a Changelog](https://keepachangelog.com/ja/1.1.0/) に準拠し、[Semantic Versioning](https://semver.org/lang/ja/) を採用しています。
 
+## [0.6.0] - 2026-06-17
+
+### Added
+- 履歴行のインラインメニューの「VS Code で開く」を **「新しいウィンドウで開く」** と **「現在のウィンドウで開く」** の2項目に分割。クリック都度にウィンドウの開き方を選べるようにした（`vscode.openFolder` の `forceNewWindow` / `forceReuseWindow`）。
+
+### Changed
+- メニューのアクションが3項目から4項目に変更（新しいウィンドウで開く／現在のウィンドウで開く／エクスプローラで開く／フルパスをコピー）。README・spec の記述とスクリーンショットを更新。
+
 ## [0.5.0] - 2026-06-04
 
 ### Added

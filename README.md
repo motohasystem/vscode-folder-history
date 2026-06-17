@@ -79,7 +79,7 @@ npm run compile
 
 ```bash
 npx vsce package
-code --install-extension folder-history-0.5.0.vsix
+code --install-extension folder-history-0.6.0.vsix
 ```
 
 ## 注意
